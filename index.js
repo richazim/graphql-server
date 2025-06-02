@@ -1,28 +1,12 @@
 const express = require('express'); // require('express') charge le module express installé via npm.
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
 const { graphqlHTTP } = require('express-graphql');
+const schema = require('./graphql/schema');
 
 const app = express();
 
-const schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        name: 'JeSuisLeNomDuQueryPrincipal',
-        fields: () => ({ // fields permet de créer les champs de requêtes GraphQL.
-            message: { // Je suis le champ message qui retourne un message.
-                type: GraphQLString,
-                resolve: () => 'Je suis la réponse du serveur GraphQL à tous les requêtes GraphQL coté client !'
-            },
-            message2: {
-                type: GraphQLString,
-                resolve: () => 'Je suis la deuxième réponse du serveur GraphQL à tous les requêtes GraphQL coté client !'
-            }
-        })
-    })
-})
-
 app.use('/graphql', graphqlHTTP({ // Middleware
-    schema: schema,
-    graphiql: true // Permet d'afficher un interface graphique de requête GraphQL dans le navigateur sur http://localhost:3000/graphql
+    schema: schema, // Le schema GraphQL
+    graphiql: true // Permet d'afficher une interface graphique de requête GraphQL dans le navigateur sur http://localhost:3000/graphql
 }))
 
 

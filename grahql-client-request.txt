@@ -1,0 +1,58 @@
+query (GET)
+1)
+query{
+  books{
+    name
+  }
+}
+
+query{
+  books{
+    name,
+    author{
+      name
+    }
+  }
+}
+
+query{
+  book(id: 1){
+    name,
+    author{
+      name
+    }
+  }
+}
+
+2)
+query {
+  authors {
+    id
+    name
+  }
+}
+
+query {
+  authors {
+    name
+    books {
+    	name
+    }
+  }
+}
+
+mutation (POST, PUT, DELETE):
+
+mutation{
+  addBook(name: "javascript", authorId: 1){
+    id
+    name
+  }
+}
+
+mutation{
+  addAuthor(name){
+    id
+    name
+  }
+}
